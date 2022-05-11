@@ -1,0 +1,72 @@
+        def pesquisar_email()    
+            email = str(input('Informe o email que deseja pesquisar: '))
+            self.cursor.execute(f"select nomes, email from contatos where nomes like '{email}'")
+            agendas = self.cursor.fetchall()
+            pos =0
+            achar = False
+            while achar == False and pos < len(agendas):
+                for i in range(len(agendas[pos])):
+                    if dados == agendas[pos][1]:
+                        nome = agendas[pos][1]
+                        email = agendas[pos][3]
+                    else:
+                        achar = False
+                if achar == True:
+                    print(f"Esses são os dados que você procurava: ")
+                    print(f'''
+                    Nome: {nome}
+                    E-mail: {email}
+                    ''')
+                else:
+                    print('Nome não foi encontrado!')
+                pos += 1
+
+Inserindo uma nova opção:
+    while True:
+        print("$" * 50)    
+        print('''
+            1.- Cadastrar contato
+            2.- Remover contato
+            3.- Apagar todos os contatos
+            4.- Editar contato
+            5.- Pesquisar contato (todos)
+            6.- Pesquisar apenas um contato
+            7.- Pesquisar e enviar e-mail
+            8.- Sair
+        ''')
+        op = int(input('Escolha uma opção: '))
+        print("$" * 50) 
+        
+        if op == 1:
+            dados.inserir()
+        elif op == 2:
+            dados.removerone()
+        elif op == 3:
+            dados.removerall()
+        elif op == 4:
+            dados.alterar()
+        elif op == 5:
+            dados.pesquisaAll()
+        elif op == 6:
+            dados.pesquisaOne()
+        elif op == 7:
+            print("""
+                1 - pesquisar e enviar via outlook
+                2 - pesquisar e enviar via gmail
+                3 - voltar ao menu pricipal
+            """)
+            segunda_opcao = int("informe a opção: ")
+            if segunda_opcao == 1:
+                dados.pesquisar_email()
+                outlook.send_outlook()
+            elif segunda_opcao == 2:
+                dados.pesquisar_email()
+                gmail.send_gmail()
+            elif:
+                print('voltando para o menu principal')
+                continue
+        elif op == 8:
+            print('\nFinalizando o programa...')
+            break
+        else:
+            print('Digite a opção correta!')
